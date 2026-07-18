@@ -5,7 +5,7 @@ import QRCode from "qrcode";
 import { Download } from "lucide-react";
 
 export function QrGenerator() {
-  const [text, setText] = useState("https://github.com/BlazingKing/utilio");
+  const [text, setText] = useState("");
   const [size, setSize] = useState(320);
   const [dataUrl, setDataUrl] = useState("");
   const [error, setError] = useState<string | null>(null);
