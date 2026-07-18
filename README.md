@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Utilio 🧰
 
-## Getting Started
+กล่องเครื่องมืออเนกประสงค์ที่ทำงานบนเบราว์เซอร์ 100% — **ไม่มีหลังบ้าน (no backend)** ข้อมูลทุกอย่างประมวลผลบนเครื่องผู้ใช้ ไม่ถูกส่งขึ้นเซิร์ฟเวอร์
 
-First, run the development server:
+## Tech Stack
+
+- **Next.js 16** (App Router) + **React 19**
+- **TypeScript**
+- **Tailwind CSS v4**
+- **lucide-react** (ไอคอน)
+- Deploy บน **Vercel** (ทุกหน้าเป็น static — ไม่ต้องใช้ server runtime)
+
+## เครื่องมือปัจจุบัน
+
+| หมวด | เครื่องมือ |
+| --- | --- |
+| แปลง & จัดข้อความ | แปลงตัวพิมพ์, นับข้อความ, จัดรูปแบบ JSON, Base64 |
+| คำนวณ & แปลงหน่วย | แปลงหน่วย, คำนวณเปอร์เซ็นต์ |
+
+## เริ่มพัฒนา
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (static)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## โครงสร้างโปรเจกต์
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├─ app/
+│  ├─ layout.tsx            # header + footer + metadata + ฟอนต์ (รวมภาษาไทย)
+│  ├─ page.tsx              # หน้าหลัก (hero + ค้นหา + การ์ดเครื่องมือ)
+│  └─ tools/<slug>/
+│     ├─ page.tsx           # Server Component: metadata + ครอบด้วย <ToolPage>
+│     └─ <name>.tsx         # Client Component: ตัวเครื่องมือ ("use client")
+├─ components/              # SiteHeader, SiteFooter, ToolCard, ToolPage, CopyButton, ToolExplorer
+└─ lib/
+   └─ tools.ts             # ⭐ registry ของเครื่องมือ + หมวดหมู่ทั้งหมด
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## การเพิ่มเครื่องมือใหม่
 
-## Learn More
+1. เพิ่ม object ใน `tools` ที่ [`src/lib/tools.ts`](src/lib/tools.ts) (กำหนด `slug`, `name`, `description`, `category`, `icon`, `keywords`)
+2. สร้างโฟลเดอร์ `src/app/tools/<slug>/`
+   - `page.tsx` — Server Component ที่ export `metadata` และเรนเดอร์ `<ToolPage slug="<slug>">`
+   - ไฟล์ Client Component สำหรับ logic ของเครื่องมือ (ขึ้นต้นด้วย `"use client"`)
 
-To learn more about Next.js, take a look at the following resources:
+หน้าหลักและการค้นหาจะดึงเครื่องมือใหม่จาก registry ให้อัตโนมัติ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy บน Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+push โปรเจกต์ขึ้น Git แล้ว import เข้า Vercel — ตรวจจับ Next.js อัตโนมัติ ไม่ต้องตั้งค่าอะไรเพิ่ม
