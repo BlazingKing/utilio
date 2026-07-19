@@ -31,6 +31,14 @@ import {
   Table,
   ScanLine,
   Dices,
+  Split,
+  PiggyBank,
+  HeartPulse,
+  Regex,
+  Timer,
+  ListOrdered,
+  Pilcrow,
+  FileCode,
   type LucideIcon,
 } from "lucide-react";
 
@@ -134,6 +142,30 @@ export const tools: Tool[] = [
     icon: Diff,
     keywords: ["diff", "เทียบข้อความ", "compare", "เปรียบเทียบ", "ต่าง", "changes"],
   },
+  {
+    slug: "line-tools",
+    name: "จัดการบรรทัด",
+    description: "เรียงลำดับ ลบบรรทัดซ้ำ ตัดช่องว่าง กลับลำดับ และลบบรรทัดว่างในข้อความหลายบรรทัด",
+    category: "text",
+    icon: ListOrdered,
+    keywords: ["บรรทัด", "line", "sort", "เรียง", "ลบซ้ำ", "unique", "trim", "reverse"],
+  },
+  {
+    slug: "lorem-ipsum",
+    name: "สร้าง Lorem Ipsum",
+    description: "สร้างข้อความจำลอง (placeholder) แบบ Lorem Ipsum หรือข้อความไทย ตามจำนวนที่ต้องการ",
+    category: "text",
+    icon: Pilcrow,
+    keywords: ["lorem", "ipsum", "placeholder", "ข้อความจำลอง", "dummy text", "filler"],
+  },
+  {
+    slug: "markdown-preview",
+    name: "พรีวิว Markdown",
+    description: "แปลง Markdown เป็น HTML และดูตัวอย่างแบบเรียลไทม์ รองรับหัวข้อ ลิสต์ โค้ด และลิงก์",
+    category: "text",
+    icon: FileCode,
+    keywords: ["markdown", "md", "preview", "html", "พรีวิว", "แปลง markdown"],
+  },
 
   // ---------- calc ----------
   {
@@ -167,6 +199,30 @@ export const tools: Tool[] = [
     category: "calc",
     icon: Dices,
     keywords: ["สุ่ม", "random", "จับรางวัล", "สุ่มชื่อ", "สุ่มเลข", "shuffle", "picker"],
+  },
+  {
+    slug: "bill-splitter",
+    name: "หารค่าใช้จ่าย",
+    description: "หารบิลแบบยืดหยุ่น — กำหนดให้บางคนออกเป็นจำนวนเงินหรือเปอร์เซ็นต์ ที่เหลือหารเท่ากัน",
+    category: "calc",
+    icon: Split,
+    keywords: ["หารบิล", "หารค่าใช้จ่าย", "split", "bill", "หารเงิน", "แชร์", "จ่ายเท่าไหร่"],
+  },
+  {
+    slug: "loan-calculator",
+    name: "คำนวณสินเชื่อ / ผ่อนชำระ",
+    description: "คำนวณค่างวดต่อเดือน ดอกเบี้ยรวม และตารางผ่อนชำระจากยอดกู้ อัตราดอกเบี้ย และจำนวนงวด",
+    category: "calc",
+    icon: PiggyBank,
+    keywords: ["สินเชื่อ", "ผ่อน", "loan", "ดอกเบี้ย", "ค่างวด", "ผ่อนบ้าน", "ผ่อนรถ", "installment"],
+  },
+  {
+    slug: "bmi-calculator",
+    name: "คำนวณ BMI",
+    description: "คำนวณดัชนีมวลกาย (BMI) จากส่วนสูงและน้ำหนัก พร้อมบอกเกณฑ์และช่วงน้ำหนักที่เหมาะสม",
+    category: "calc",
+    icon: HeartPulse,
+    keywords: ["bmi", "ดัชนีมวลกาย", "น้ำหนัก", "ส่วนสูง", "อ้วน", "ผอม", "สุขภาพ"],
   },
 
   // ---------- thai ----------
@@ -283,6 +339,30 @@ export const tools: Tool[] = [
     category: "dev",
     icon: Table,
     keywords: ["csv", "json", "convert", "แปลง", "ตาราง", "spreadsheet", "excel"],
+  },
+  {
+    slug: "regex-tester",
+    name: "ทดสอบ Regex",
+    description: "ทดสอบ Regular Expression กับข้อความ ไฮไลต์ผลที่ตรงและดูกลุ่มที่จับได้แบบเรียลไทม์",
+    category: "dev",
+    icon: Regex,
+    keywords: ["regex", "regular expression", "pattern", "match", "ทดสอบ", "ค้นหา"],
+  },
+  {
+    slug: "number-base",
+    name: "แปลงเลขฐาน",
+    description: "แปลงตัวเลขระหว่างฐาน 2 (binary), ฐาน 8, ฐาน 10 และฐาน 16 (hex)",
+    category: "dev",
+    icon: Binary,
+    keywords: ["เลขฐาน", "binary", "hex", "octal", "ฐาน 2", "ฐาน 16", "base convert"],
+  },
+  {
+    slug: "cron-explainer",
+    name: "อธิบาย Cron",
+    description: "แปลง cron expression เป็นคำอธิบายภาษาคน พร้อมแสดงเวลาที่จะทำงานครั้งถัดไป",
+    category: "dev",
+    icon: Timer,
+    keywords: ["cron", "crontab", "schedule", "ตารางเวลา", "อธิบาย cron", "expression"],
   },
 
   // ---------- media ----------
