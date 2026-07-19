@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Users, Trash2 } from "lucide-react";
 import { Input, Button, Card, Switch, Label } from "@heroui/react";
 import { AppSelect } from "@/components/ui/select";
 
@@ -36,6 +36,7 @@ export function BillSplitter() {
   const [total, setTotal] = useState("1200");
   const [service, setService] = useState("0");
   const [vat, setVat] = useState("7");
+  const [count, setCount] = useState("4");
   const [people, setPeople] = useState<Person[]>([
     { id: 1, name: "ดี", fixedMode: "amount", fixedValue: "500", joinEqual: true },
     { id: 2, name: "เอ", fixedMode: "none", fixedValue: "", joinEqual: true },
@@ -96,6 +97,24 @@ export function BillSplitter() {
   function removePerson(id: number) {
     setPeople((prev) => prev.filter((p) => p.id !== id));
   }
+  function generatePeople() {
+    const n = Math.min(Math.max(Math.floor(num(count)), 1), 50);
+    setPeople(
+      Array.from({ length: n }, (_, i) => ({
+        id: nextId++,
+        name: `คนที่ ${i + 1}`,
+        fixedMode: "none" as FixedMode,
+        fixedValue: "",
+        joinEqual: true,
+      })),
+    );
+  }
+  function clearAll() {
+    setPeople([
+      { id: nextId++, name: "", fixedMode: "none", fixedValue: "", joinEqual: true },
+      { id: nextId++, name: "", fixedMode: "none", fixedValue: "", joinEqual: true },
+    ]);
+  }
 
   return (
     <div className="flex flex-col gap-5">
@@ -143,6 +162,33 @@ export function BillSplitter() {
             aria-label="VAT เปอร์เซ็นต์"
           />
         </div>
+      </div>
+
+      {/* สร้างรายชื่อทีเดียวจากจำนวนคน + ล้าง */}
+      <div className="flex flex-wrap items-end gap-2 rounded-xl border border-border bg-surface-2 p-3">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="bs-count" className="text-sm font-medium">
+            จำนวนคน
+          </Label>
+          <div className="flex items-center gap-1.5">
+            <Input
+              id="bs-count"
+              type="number"
+              min={1}
+              max={50}
+              value={count}
+              onChange={(e) => setCount(e.target.value)}
+              className="w-20"
+            />
+            <span className="text-sm text-muted">คน</span>
+          </div>
+        </div>
+        <Button variant="primary" size="sm" onPress={generatePeople}>
+          <Users className="h-4 w-4" /> สร้างรายชื่อ
+        </Button>
+        <Button variant="danger-soft" size="sm" className="ml-auto" onPress={clearAll}>
+          <Trash2 className="h-4 w-4" /> ล้าง
+        </Button>
       </div>
 
       <div className="flex flex-col gap-2">
