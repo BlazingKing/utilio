@@ -2,7 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { ArrowRightLeft } from "lucide-react";
+import { TextArea, Label } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
+import { SegmentedControl } from "@/components/ui/segmented-control";
 
 type Mode = "encode" | "decode";
 
@@ -38,31 +40,29 @@ export function Base64Tool() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="inline-flex self-start rounded-xl border border-border bg-surface-2 p-1 text-sm">
-        {(["encode", "decode"] as Mode[]).map((m) => (
-          <button
-            key={m}
-            onClick={() => setMode(m)}
-            className={`rounded-lg px-4 py-1.5 font-medium transition-colors ${
-              mode === m ? "bg-brand text-white" : "text-muted hover:text-foreground"
-            }`}
-          >
-            {m === "encode" ? "เข้ารหัส" : "ถอดรหัส"}
-          </button>
-        ))}
-      </div>
+      <SegmentedControl
+        className="self-start"
+        aria-label="โหมด Base64"
+        value={mode}
+        onChange={(v) => setMode(v as Mode)}
+        options={[
+          { value: "encode", label: "เข้ารหัส" },
+          { value: "decode", label: "ถอดรหัส" },
+        ]}
+      />
 
-      <div>
-        <label htmlFor="b64-in" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="b64-in" className="text-sm font-medium">
           {mode === "encode" ? "ข้อความ" : "Base64"}
-        </label>
-        <textarea
+        </Label>
+        <TextArea
           id="b64-in"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={mode === "encode" ? "พิมพ์ข้อความ..." : "วาง Base64..."}
           rows={5}
-          className="field-mono resize-y"
+          fullWidth
+          className="resize-y font-mono"
           spellCheck={false}
         />
       </div>
@@ -71,19 +71,20 @@ export function Base64Tool() {
         <ArrowRightLeft className="h-4 w-4" />
       </div>
 
-      <div>
-        <div className="mb-1.5 flex items-center justify-between">
-          <label htmlFor="b64-out" className="text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center justify-between">
+          <Label htmlFor="b64-out" className="text-sm font-medium">
             {mode === "encode" ? "Base64" : "ข้อความ"}
-          </label>
-          <CopyButton value={output} className="btn-ghost !px-2.5 !py-1 text-xs" />
+          </Label>
+          <CopyButton value={output} />
         </div>
-        <textarea
+        <TextArea
           id="b64-out"
           value={error ?? output}
           readOnly
           rows={5}
-          className={`field-mono resize-y bg-surface-2 ${error ? "text-red-600 dark:text-red-400" : ""}`}
+          fullWidth
+          className={`resize-y font-mono ${error ? "text-red-600 dark:text-red-400" : ""}`}
           spellCheck={false}
         />
       </div>

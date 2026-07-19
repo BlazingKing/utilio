@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { TextArea, Card } from "@heroui/react";
 
 export function TextCounter() {
   const [text, setText] = useState("");
@@ -34,30 +35,31 @@ export function TextCounter() {
 
   return (
     <div className="flex flex-col gap-5">
-      <textarea
+      <TextArea
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="พิมพ์หรือวางข้อความเพื่อดูสถิติแบบเรียลไทม์..."
         rows={8}
-        className="field resize-y"
+        fullWidth
+        className="resize-y"
         aria-label="ข้อความสำหรับนับ"
       />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {cards.map((c) => (
-          <div key={c.label} className="card p-4 text-center">
+          <Card key={c.label} className="p-4 text-center">
             <div className="text-2xl font-bold tabular-nums text-brand">
               {c.value.toLocaleString()}
             </div>
             <div className="mt-0.5 text-xs text-muted">{c.label}</div>
-          </div>
+          </Card>
         ))}
       </div>
 
-      <div className="card px-4 py-3 text-center text-sm text-muted">
+      <Card className="px-4 py-3 text-center text-sm text-muted">
         เวลาอ่านโดยประมาณ:{" "}
         <span className="font-semibold text-foreground">{readingLabel}</span>
-      </div>
+      </Card>
     </div>
   );
 }

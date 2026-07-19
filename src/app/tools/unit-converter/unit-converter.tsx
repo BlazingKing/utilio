@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { ArrowLeftRight } from "lucide-react";
+import { Input, Button, Label } from "@heroui/react";
+import { AppSelect } from "@/components/ui/select";
+import { SegmentedControl } from "@/components/ui/segmented-control";
 
 type CategoryKey = "length" | "weight" | "temperature";
 
@@ -105,60 +108,54 @@ export function UnitConverter() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="inline-flex flex-wrap gap-1 self-start rounded-xl border border-border bg-surface-2 p-1 text-sm">
-        {categoryTabs.map((c) => (
-          <button
-            key={c.key}
-            onClick={() => changeCategory(c.key)}
-            className={`rounded-lg px-4 py-1.5 font-medium transition-colors ${
-              category === c.key ? "bg-brand text-white" : "text-muted hover:text-foreground"
-            }`}
-          >
-            {c.label}
-          </button>
-        ))}
-      </div>
+      <SegmentedControl
+        className="self-start"
+        aria-label="ประเภทหน่วย"
+        value={category}
+        onChange={(v) => changeCategory(v as CategoryKey)}
+        options={categoryTabs.map((c) => ({ value: c.key, label: c.label }))}
+      />
 
       <div className="grid items-end gap-3 sm:grid-cols-[1fr_auto_1fr]">
         <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium">จาก</label>
-          <input
+          <Label className="text-sm font-medium">จาก</Label>
+          <Input
             type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="field"
+            fullWidth
             placeholder="0"
+            aria-label="ค่าที่ต้องการแปลง"
           />
-          <select value={from} onChange={(e) => setFrom(e.target.value)} className="field">
-            {units.map((u) => (
-              <option key={u.id} value={u.id}>
-                {u.name}
-              </option>
-            ))}
-          </select>
+          <AppSelect
+            aria-label="หน่วยต้นทาง"
+            value={from}
+            onChange={setFrom}
+            options={units.map((u) => ({ value: u.id, label: u.name }))}
+          />
         </div>
 
-        <button
-          onClick={swap}
-          className="btn-ghost mb-0 h-10 w-10 shrink-0 justify-center !p-0 sm:mb-[1px]"
+        <Button
+          isIconOnly
+          variant="secondary"
+          onPress={swap}
           aria-label="สลับหน่วย"
-          title="สลับหน่วย"
+          className="mb-0.5 shrink-0"
         >
           <ArrowLeftRight className="h-4 w-4" />
-        </button>
+        </Button>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium">เป็น</label>
-          <div className="field flex items-center overflow-x-auto bg-surface-2 font-semibold tabular-nums">
+          <Label className="text-sm font-medium">เป็น</Label>
+          <div className="flex min-h-10 items-center overflow-x-auto rounded-xl border border-border bg-surface-2 px-3 py-2 text-sm font-semibold tabular-nums">
             {result === null ? <span className="text-muted">—</span> : format(result)}
           </div>
-          <select value={to} onChange={(e) => setTo(e.target.value)} className="field">
-            {units.map((u) => (
-              <option key={u.id} value={u.id}>
-                {u.name}
-              </option>
-            ))}
-          </select>
+          <AppSelect
+            aria-label="หน่วยปลายทาง"
+            value={to}
+            onChange={setTo}
+            options={units.map((u) => ({ value: u.id, label: u.name }))}
+          />
         </div>
       </div>
 

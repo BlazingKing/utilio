@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { Input, Card } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 
 function pad(n: number) {
@@ -48,29 +49,28 @@ export function TimestampConverter() {
   return (
     <div className="flex flex-col gap-6">
       {/* ปัจจุบัน */}
-      <div className="card flex flex-wrap items-center justify-between gap-2 p-4">
+      <Card className="flex flex-wrap flex-row items-center justify-between gap-2 p-4">
         <div>
           <p className="text-xs text-muted">Unix timestamp ปัจจุบัน (วินาที)</p>
           <p className="font-mono text-xl font-semibold tabular-nums text-brand">
             {Math.floor(now / 1000)}
           </p>
         </div>
-        <CopyButton
-          value={String(Math.floor(now / 1000))}
-          className="btn-ghost !px-2.5 !py-1 text-xs"
-        />
-      </div>
+        <CopyButton value={String(Math.floor(now / 1000))} />
+      </Card>
 
       {/* timestamp -> date */}
-      <div className="card p-5">
+      <Card className="p-5">
         <h3 className="mb-3 text-sm font-semibold text-muted">Timestamp → วันที่</h3>
-        <input
+        <Input
           type="text"
           inputMode="numeric"
           value={ts}
           onChange={(e) => setTs(e.target.value)}
           placeholder="เช่น 1752883200 หรือ 1752883200000"
-          className="field-mono"
+          fullWidth
+          className="font-mono"
+          aria-label="Unix timestamp"
         />
         {tsResult && (
           <div className="mt-3 flex flex-col gap-2 text-sm">
@@ -79,17 +79,18 @@ export function TimestampConverter() {
             <Row label="UTC" value={tsResult.utc} mono />
           </div>
         )}
-      </div>
+      </Card>
 
       {/* date -> timestamp */}
-      <div className="card p-5">
+      <Card className="p-5">
         <h3 className="mb-3 text-sm font-semibold text-muted">วันที่ → Timestamp</h3>
-        <input
+        <Input
           type="datetime-local"
           step={1}
           value={dateInput}
           onChange={(e) => setDateInput(e.target.value)}
-          className="field w-auto"
+          className="w-auto"
+          aria-label="วันที่และเวลา"
         />
         {dateResult && (
           <div className="mt-3 flex flex-col gap-2 text-sm">
@@ -97,7 +98,7 @@ export function TimestampConverter() {
             <Row label="มิลลิวินาที (ms)" value={String(dateResult.ms)} mono />
           </div>
         )}
-      </div>
+      </Card>
     </div>
   );
 }
@@ -109,7 +110,7 @@ function Row({ label, value, mono }: { label: string; value: string; mono?: bool
         <span className="mr-2 text-xs text-muted">{label}</span>
         <span className={mono ? "font-mono" : ""}>{value}</span>
       </div>
-      <CopyButton value={value} className="btn-ghost !px-2 !py-1 text-xs" />
+      <CopyButton value={value} />
     </div>
   );
 }

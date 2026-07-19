@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
+import { Input, Label } from "@heroui/react";
 
 /** ตรวจสอบเลขบัตรประชาชนไทย 13 หลักด้วย checksum */
 function validateThaiId(id: string): boolean {
@@ -33,20 +34,21 @@ export function ThaiIdChecker() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="id-in" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="id-in" className="text-sm font-medium">
           เลขบัตรประชาชน (13 หลัก)
-        </label>
-        <input
+        </Label>
+        <Input
           id="id-in"
           type="text"
           inputMode="numeric"
           value={formatId(digits)}
           onChange={(e) => setRaw(e.target.value)}
           placeholder="x-xxxx-xxxxx-xx-x"
-          className="field text-center font-mono text-lg tracking-wider"
+          fullWidth
+          className="text-center font-mono text-lg tracking-wider"
         />
-        <p className="mt-1.5 text-right text-xs text-muted">{digits.length}/13 หลัก</p>
+        <p className="text-right text-xs text-muted">{digits.length}/13 หลัก</p>
       </div>
 
       {complete && (

@@ -1,46 +1,15 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
+/* ---- แบรนด์ Utilio: map สีหลักของ HeroUI (accent) เป็น indigo ---- */
 :root {
-  --background: #f8fafc;
-  --surface: #ffffff;
-  --surface-2: #f1f5f9;
-  --foreground: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --brand: #6366f1;
-  --brand-strong: #4f46e5;
-  --brand-soft: #eef2ff;
-  --ring: #c7d2fe;
+  --accent: #6366f1;
+  --accent-foreground: #ffffff;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b1120;
-    --surface: #111827;
-    --surface-2: #0f172a;
-    --foreground: #e5e7eb;
-    --muted: #94a3b8;
-    --border: #1f2937;
-    --brand: #818cf8;
-    --brand-strong: #6366f1;
-    --brand-soft: #1e1b4b;
-    --ring: #3730a3;
-  }
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-brand: var(--brand);
-  --color-brand-strong: var(--brand-strong);
-  --color-brand-soft: var(--brand-soft);
-  --color-ring: var(--ring);
-  --font-sans: var(--font-geist-sans), var(--font-thai), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), var(--font-thai), ui-monospace, monospace;
+.dark,
+[data-theme="dark"] {
+  --accent: #818cf8;
+  --accent-foreground: #ffffff;
 }
 
 body {
@@ -48,40 +17,18 @@ body {
   color: var(--foreground);
 }
 
-@layer components {
-  .card {
-    @apply rounded-2xl border border-border bg-surface;
-  }
-
-  .btn {
-    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm
-      font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring
-      disabled:pointer-events-none disabled:opacity-50;
-  }
-  .btn-primary {
-    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm
-      font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring
-      disabled:pointer-events-none disabled:opacity-50
-      bg-brand text-white hover:bg-brand-strong;
-  }
-  .btn-ghost {
-    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm
-      font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring
-      disabled:pointer-events-none disabled:opacity-50
-      border border-border bg-surface text-foreground hover:bg-surface-2;
-  }
-
-  .field {
-    @apply w-full rounded-xl border border-border bg-surface px-3 py-2 text-sm text-foreground
-      placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring;
-  }
-  .field-mono {
-    @apply w-full rounded-xl border border-border bg-surface px-3 py-2 font-mono text-sm text-foreground
-      placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring;
-  }
-
-  .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-2
-      px-3 py-1 text-xs font-medium text-muted;
-  }
+/* ---- map token ของ HeroUI เข้ากับชื่อ utility ที่ใช้ในเว็บ + ฟอนต์ไทย ---- */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-secondary);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--accent);
+  --color-brand-strong: var(--accent-hover);
+  --color-brand-soft: var(--accent-soft);
+  --color-ring: var(--focus);
+  --font-sans: var(--font-geist-sans), var(--font-thai), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), var(--font-thai), ui-monospace, monospace;
 }

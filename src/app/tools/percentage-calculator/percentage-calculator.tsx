@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Input, Card } from "@heroui/react";
 
 function fmt(n: number): string {
   if (!Number.isFinite(n)) return "—";
@@ -26,12 +27,13 @@ function NumInput({
   placeholder?: string;
 }) {
   return (
-    <input
+    <Input
       type="number"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="field w-24 text-center"
+      aria-label="ตัวเลข"
+      className="w-24 text-center"
     />
   );
 }
@@ -63,7 +65,7 @@ export function PercentageCalculator() {
   return (
     <div className="flex flex-col gap-4">
       {/* สูตร 1 */}
-      <div className="card p-5">
+      <Card className="p-5">
         <h3 className="mb-3 text-sm font-semibold text-muted">หาเปอร์เซ็นต์ของจำนวน</h3>
         <div className="flex flex-wrap items-center gap-2">
           <NumInput value={p1} onChange={setP1} /> <span>% ของ</span>
@@ -72,10 +74,10 @@ export function PercentageCalculator() {
         <ResultRow>
           {p1 || "?"}% ของ {n1 || "?"} = <span className="font-bold">{r1 === null ? "—" : fmt(r1)}</span>
         </ResultRow>
-      </div>
+      </Card>
 
       {/* สูตร 2 */}
-      <div className="card p-5">
+      <Card className="p-5">
         <h3 className="mb-3 text-sm font-semibold text-muted">คิดเป็นกี่เปอร์เซ็นต์</h3>
         <div className="flex flex-wrap items-center gap-2">
           <NumInput value={a2} onChange={setA2} /> <span>เป็นกี่ % ของ</span>
@@ -84,10 +86,10 @@ export function PercentageCalculator() {
         <ResultRow>
           {a2 || "?"} เป็น <span className="font-bold">{r2 === null ? "—" : fmt(r2)}%</span> ของ {b2 || "?"}
         </ResultRow>
-      </div>
+      </Card>
 
       {/* สูตร 3 */}
-      <div className="card p-5">
+      <Card className="p-5">
         <h3 className="mb-3 text-sm font-semibold text-muted">เปลี่ยนแปลงกี่เปอร์เซ็นต์ (เพิ่ม/ลด)</h3>
         <div className="flex flex-wrap items-center gap-2">
           <span>จาก</span> <NumInput value={x3} onChange={setX3} />
@@ -102,7 +104,7 @@ export function PercentageCalculator() {
             </span>
           )}
         </ResultRow>
-      </div>
+      </Card>
     </div>
   );
 }

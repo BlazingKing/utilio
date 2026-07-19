@@ -22,6 +22,8 @@ import {
   Palette,
   QrCode,
   ImageDown,
+  Lock,
+  ReceiptText,
   type LucideIcon,
 } from "lucide-react";
 
@@ -169,6 +171,14 @@ export const tools: Tool[] = [
     icon: Languages,
     keywords: ["เลขไทย", "เลขอารบิก", "thai numeral", "๐๑๒๓", "แปลงเลข"],
   },
+  {
+    slug: "vat-calculator",
+    name: "คำนวณ VAT 7%",
+    description: "คิดภาษีมูลค่าเพิ่ม 7% — แยก VAT ออกจากราคารวม หรือบวก VAT เข้าราคาก่อนภาษี",
+    category: "thai",
+    icon: ReceiptText,
+    keywords: ["vat", "ภาษีมูลค่าเพิ่ม", "7%", "แยก vat", "บวก vat", "ราคาก่อนภาษี", "ใบกำกับภาษี"],
+  },
 
   // ---------- dev ----------
   {
@@ -210,6 +220,14 @@ export const tools: Tool[] = [
     category: "dev",
     icon: KeyRound,
     keywords: ["jwt", "token", "decode", "json web token", "ถอดรหัส", "payload"],
+  },
+  {
+    slug: "password-generator",
+    name: "สร้างรหัสผ่าน",
+    description: "สุ่มรหัสผ่านที่ปลอดภัย กำหนดความยาวและชนิดอักขระ พร้อมวัดความแข็งแรง",
+    category: "dev",
+    icon: Lock,
+    keywords: ["password", "รหัสผ่าน", "generate", "สุ่ม", "random", "secure", "strong"],
   },
 
   // ---------- media ----------

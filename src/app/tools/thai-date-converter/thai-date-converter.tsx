@@ -1,7 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Input, Card } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
+import { SegmentedControl } from "@/components/ui/segmented-control";
 
 const THAI_MONTHS = [
   "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
@@ -44,28 +46,25 @@ export function ThaiDateConverter() {
   return (
     <div className="flex flex-col gap-6">
       {/* แปลงปี */}
-      <div className="card p-5">
+      <Card className="p-5">
         <h3 className="mb-3 text-sm font-semibold text-muted">แปลงปี</h3>
-        <div className="mb-3 inline-flex rounded-xl border border-border bg-surface-2 p-1 text-sm">
-          <button
-            onClick={() => setYearMode("ad2be")}
-            className={`rounded-lg px-3 py-1.5 font-medium transition-colors ${yearMode === "ad2be" ? "bg-brand text-white" : "text-muted hover:text-foreground"}`}
-          >
-            ค.ศ. → พ.ศ.
-          </button>
-          <button
-            onClick={() => setYearMode("be2ad")}
-            className={`rounded-lg px-3 py-1.5 font-medium transition-colors ${yearMode === "be2ad" ? "bg-brand text-white" : "text-muted hover:text-foreground"}`}
-          >
-            พ.ศ. → ค.ศ.
-          </button>
-        </div>
+        <SegmentedControl
+          className="mb-3"
+          aria-label="ทิศทางการแปลงปี"
+          value={yearMode}
+          onChange={(v) => setYearMode(v as "ad2be" | "be2ad")}
+          options={[
+            { value: "ad2be", label: "ค.ศ. → พ.ศ." },
+            { value: "be2ad", label: "พ.ศ. → ค.ศ." },
+          ]}
+        />
         <div className="flex items-center gap-3">
-          <input
+          <Input
             type="number"
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="field w-32 text-center text-lg"
+            className="w-32 text-center text-lg"
+            aria-label="ปี"
           />
           <span className="text-muted">=</span>
           <div className="rounded-xl bg-brand-soft px-4 py-2 text-lg font-semibold text-brand">
@@ -73,16 +72,17 @@ export function ThaiDateConverter() {
           </div>
           <span className="text-sm text-muted">{yearMode === "ad2be" ? "พ.ศ." : "ค.ศ."}</span>
         </div>
-      </div>
+      </Card>
 
       {/* จัดรูปแบบวันที่ */}
-      <div className="card p-5">
+      <Card className="p-5">
         <h3 className="mb-3 text-sm font-semibold text-muted">จัดรูปแบบวันที่แบบไทย</h3>
-        <input
+        <Input
           type="date"
           value={dateStr}
           onChange={(e) => setDateStr(e.target.value)}
-          className="field mb-4 w-auto"
+          className="mb-4 w-auto"
+          aria-label="เลือกวันที่"
         />
         {formatted && (
           <div className="flex flex-col gap-2">
@@ -96,12 +96,12 @@ export function ThaiDateConverter() {
                   <span className="mr-2 text-xs text-muted">{f.label}</span>
                   <span className="font-medium">{f.value}</span>
                 </div>
-                <CopyButton value={f.value} className="btn-ghost !px-2 !py-1 text-xs" />
+                <CopyButton value={f.value} />
               </div>
             ))}
           </div>
         )}
-      </div>
+      </Card>
     </div>
   );
 }

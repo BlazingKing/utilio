@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import QRCode from "qrcode";
 import { Download } from "lucide-react";
+import { TextArea, Button, Label } from "@heroui/react";
+import { AppSlider } from "@/components/ui/slider";
 
 export function QrGenerator() {
   const [text, setText] = useState("");
@@ -38,33 +40,30 @@ export function QrGenerator() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div>
-        <label htmlFor="qr-in" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="qr-in" className="text-sm font-medium">
           ข้อความหรือ URL
-        </label>
-        <textarea
+        </Label>
+        <TextArea
           id="qr-in"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="พิมพ์ข้อความหรือวางลิงก์..."
           rows={3}
-          className="field resize-y"
+          fullWidth
+          className="resize-y"
         />
       </div>
 
-      <div>
-        <label htmlFor="qr-size" className="mb-1.5 block text-sm font-medium">
-          ขนาด: {size}px
-        </label>
-        <input
-          id="qr-size"
-          type="range"
-          min={128}
-          max={640}
-          step={32}
+      <div className="flex flex-col gap-2">
+        <Label className="text-sm font-medium">ขนาด: {size}px</Label>
+        <AppSlider
+          aria-label="ขนาด QR"
           value={size}
-          onChange={(e) => setSize(Number(e.target.value))}
-          className="w-full accent-[var(--brand)]"
+          onChange={setSize}
+          minValue={128}
+          maxValue={640}
+          step={32}
         />
       </div>
 
@@ -82,9 +81,9 @@ export function QrGenerator() {
               className="rounded-2xl border border-border bg-white p-2"
               style={{ width: Math.min(size, 320), height: Math.min(size, 320) }}
             />
-            <button onClick={download} className="btn-primary">
+            <Button variant="primary" onPress={download}>
               <Download className="h-4 w-4" /> ดาวน์โหลด PNG
-            </button>
+            </Button>
           </>
         ) : (
           <p className="text-sm text-muted">กรอกข้อความเพื่อสร้าง QR</p>

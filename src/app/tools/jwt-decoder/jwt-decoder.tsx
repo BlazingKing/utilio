@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AlertCircle } from "lucide-react";
+import { TextArea, Card, Chip, Label } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 
 function decodeSegment(seg: string): unknown {
@@ -44,17 +45,18 @@ export function JwtDecoder() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="jwt-in" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="jwt-in" className="text-sm font-medium">
           JWT
-        </label>
-        <textarea
+        </Label>
+        <TextArea
           id="jwt-in"
           value={token}
           onChange={(e) => setToken(e.target.value)}
           placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
           rows={4}
-          className="field-mono resize-y"
+          fullWidth
+          className="resize-y font-mono"
           spellCheck={false}
         />
       </div>
@@ -72,7 +74,7 @@ export function JwtDecoder() {
           <Panel title="Payload" value={decoded.payload} />
 
           {payloadObj && (payloadObj.exp || payloadObj.iat || payloadObj.nbf) ? (
-            <div className="card p-4 text-sm">
+            <Card className="p-4 text-sm">
               <p className="mb-2 font-semibold text-muted">เวลา (แปลงจาก timestamp)</p>
               <div className="flex flex-col gap-1">
                 {payloadObj.iat != null && <TimeRow label="ออกเมื่อ (iat)" value={tsToText(payloadObj.iat)} />}
@@ -85,7 +87,7 @@ export function JwtDecoder() {
                   />
                 )}
               </div>
-            </div>
+            </Card>
           ) : null}
         </>
       )}
@@ -100,13 +102,13 @@ export function JwtDecoder() {
 function Panel({ title, value }: { title: string; value: unknown }) {
   const text = JSON.stringify(value, null, 2);
   return (
-    <div className="card p-4">
+    <Card className="p-4">
       <div className="mb-2 flex items-center justify-between">
-        <span className="chip">{title}</span>
-        <CopyButton value={text} className="btn-ghost !px-2 !py-1 text-xs" />
+        <Chip size="sm" variant="secondary">{title}</Chip>
+        <CopyButton value={text} />
       </div>
       <pre className="overflow-x-auto rounded-lg bg-surface-2 p-3 font-mono text-sm">{text}</pre>
-    </div>
+    </Card>
   );
 }
 

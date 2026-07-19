@@ -2,6 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Download, ImageUp } from "lucide-react";
+import { Card, Label, buttonVariants } from "@heroui/react";
+import { AppSelect } from "@/components/ui/select";
+import { AppSlider } from "@/components/ui/slider";
 
 type Format = "image/jpeg" | "image/webp" | "image/png";
 
@@ -88,7 +91,7 @@ export function ImageCompressor() {
       {/* พื้นที่อัปโหลด */}
       <button
         onClick={() => inputRef.current?.click()}
-        className="card flex flex-col items-center gap-2 border-dashed p-8 text-muted transition-colors hover:border-brand hover:text-brand"
+        className="flex flex-col items-center gap-2 rounded-2xl border border-dashed border-border bg-surface p-8 text-muted transition-colors hover:border-brand hover:text-brand"
       >
         <ImageUp className="h-8 w-8" />
         <span className="text-sm font-medium">คลิกเพื่อเลือกรูปภาพ</span>
@@ -105,63 +108,57 @@ export function ImageCompressor() {
       {source && (
         <>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label htmlFor="mw" className="mb-1.5 block text-sm font-medium">
+            <div className="flex flex-col gap-2">
+              <Label className="text-sm font-medium">
                 ความกว้างสูงสุด: {maxWidth}px
-              </label>
-              <input
-                id="mw"
-                type="range"
-                min={320}
-                max={3840}
-                step={160}
+              </Label>
+              <AppSlider
+                aria-label="ความกว้างสูงสุด"
                 value={maxWidth}
-                onChange={(e) => setMaxWidth(Number(e.target.value))}
-                className="w-full accent-[var(--brand)]"
+                onChange={setMaxWidth}
+                minValue={320}
+                maxValue={3840}
+                step={160}
               />
             </div>
-            <div>
-              <label htmlFor="fmt" className="mb-1.5 block text-sm font-medium">
-                รูปแบบไฟล์
-              </label>
-              <select
-                id="fmt"
+            <div className="flex flex-col gap-1.5">
+              <Label className="text-sm font-medium">รูปแบบไฟล์</Label>
+              <AppSelect
+                aria-label="รูปแบบไฟล์"
                 value={format}
-                onChange={(e) => setFormat(e.target.value as Format)}
-                className="field"
-              >
-                <option value="image/jpeg">JPEG</option>
-                <option value="image/webp">WebP</option>
-                <option value="image/png">PNG</option>
-              </select>
+                onChange={(v) => setFormat(v as Format)}
+                options={[
+                  { value: "image/jpeg", label: "JPEG" },
+                  { value: "image/webp", label: "WebP" },
+                  { value: "image/png", label: "PNG" },
+                ]}
+              />
             </div>
           </div>
 
           {format !== "image/png" && (
-            <div>
-              <label htmlFor="q" className="mb-1.5 block text-sm font-medium">
+            <div className="flex flex-col gap-2">
+              <Label className="text-sm font-medium">
                 คุณภาพ: {Math.round(quality * 100)}%
-              </label>
-              <input
-                id="q"
-                type="range"
-                min={0.1}
-                max={1}
-                step={0.05}
+              </Label>
+              <AppSlider
+                aria-label="คุณภาพ"
                 value={quality}
-                onChange={(e) => setQuality(Number(e.target.value))}
-                className="w-full accent-[var(--brand)]"
+                onChange={setQuality}
+                minValue={0.1}
+                maxValue={1}
+                step={0.05}
               />
             </div>
           )}
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="card p-4 text-sm">
+            <Card className="p-4 text-sm">
               <p className="mb-1 font-semibold text-muted">ต้นฉบับ</p>
               <p>{source.width} × {source.height}px</p>
               <p className="tabular-nums">{formatBytes(source.size)}</p>
-            </div>
-            <div className="card p-4 text-sm">
+            </Card>
+            <Card className="p-4 text-sm">
               <p className="mb-1 font-semibold text-muted">หลังบีบอัด</p>
               {result ? (
                 <>
@@ -178,7 +175,7 @@ export function ImageCompressor() {
               ) : (
                 <p className="text-muted">กำลังประมวลผล...</p>
               )}
-            </div>
+            </Card>
           </div>
 
           {result && (
@@ -189,7 +186,11 @@ export function ImageCompressor() {
                 alt="ผลลัพธ์"
                 className="max-h-80 rounded-2xl border border-border"
               />
-              <a href={result.url} download={`compressed.${ext}`} className="btn-primary">
+              <a
+                href={result.url}
+                download={`compressed.${ext}`}
+                className={buttonVariants({ variant: "primary" })}
+              >
                 <Download className="h-4 w-4" /> ดาวน์โหลด
               </a>
             </div>

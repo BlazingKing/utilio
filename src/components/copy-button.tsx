@@ -2,15 +2,30 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { Button } from "@heroui/react";
+
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "outline"
+  | "ghost"
+  | "danger"
+  | "danger-soft";
+type ButtonSize = "sm" | "md" | "lg";
 
 export function CopyButton({
   value,
   label = "คัดลอก",
-  className = "btn-ghost",
+  variant = "tertiary",
+  size = "sm",
+  fullWidth,
 }: {
   value: string;
   label?: string;
-  className?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  fullWidth?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -26,7 +41,13 @@ export function CopyButton({
   }
 
   return (
-    <button type="button" onClick={handleCopy} className={className} disabled={!value}>
+    <Button
+      variant={variant}
+      size={size}
+      fullWidth={fullWidth}
+      onPress={handleCopy}
+      isDisabled={!value}
+    >
       {copied ? (
         <>
           <Check className="h-4 w-4" /> คัดลอกแล้ว
@@ -36,6 +57,6 @@ export function CopyButton({
           <Copy className="h-4 w-4" /> {label}
         </>
       )}
-    </button>
+    </Button>
   );
 }

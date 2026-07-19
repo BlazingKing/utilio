@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { TextArea, Card, Chip, Label } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 
 const ALGOS = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"] as const;
@@ -38,31 +39,32 @@ export function HashGenerator() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="hash-in" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="hash-in" className="text-sm font-medium">
           ข้อความ
-        </label>
-        <textarea
+        </Label>
+        <TextArea
           id="hash-in"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="พิมพ์ข้อความที่ต้องการคำนวณ hash..."
           rows={4}
-          className="field resize-y"
+          fullWidth
+          className="resize-y"
         />
       </div>
 
       <div className="flex flex-col gap-3">
         {ALGOS.map((a) => (
-          <div key={a} className="card p-3">
+          <Card key={a} className="p-3">
             <div className="mb-1.5 flex items-center justify-between">
-              <span className="chip">{a}</span>
-              <CopyButton value={input ? hashes[a] : ""} className="btn-ghost !px-2 !py-1 text-xs" />
+              <Chip size="sm" variant="secondary">{a}</Chip>
+              <CopyButton value={input ? hashes[a] : ""} />
             </div>
             <code className="block break-all font-mono text-sm">
               {input && hashes[a] ? hashes[a] : <span className="text-muted">—</span>}
             </code>
-          </div>
+          </Card>
         ))}
       </div>
 

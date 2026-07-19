@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Input, Button, Card, Label } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 
 const NUMBERS = ["ศูนย์", "หนึ่ง", "สอง", "สาม", "สี่", "ห้า", "หก", "เจ็ด", "แปด", "เก้า"];
@@ -67,45 +68,48 @@ export function BahtText() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="baht-in" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="baht-in" className="text-sm font-medium">
           จำนวนเงิน (บาท)
-        </label>
-        <input
+        </Label>
+        <Input
           id="baht-in"
           type="text"
           inputMode="decimal"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="เช่น 1250.50"
-          className="field text-lg"
+          fullWidth
+          className="text-lg"
         />
         {preview && (
-          <p className="mt-1.5 text-sm text-muted">
+          <p className="text-sm text-muted">
             = <span className="tabular-nums">{preview}</span> บาท
           </p>
         )}
       </div>
 
-      <div className="card p-5">
+      <Card className="p-5">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-sm font-medium text-muted">ผลลัพธ์</span>
-          <CopyButton value={result} className="btn-ghost !px-2.5 !py-1 text-xs" />
+          <CopyButton value={result} />
         </div>
         <p className="text-lg font-medium leading-relaxed">
           {result || <span className="text-muted">กรอกจำนวนเงินที่ถูกต้อง</span>}
         </p>
-      </div>
+      </Card>
 
       <div className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-3">
         {["0", "25", "108", "1000000", "1234.75", "1000001"].map((ex) => (
-          <button
+          <Button
             key={ex}
-            onClick={() => setValue(ex)}
-            className="btn-ghost justify-start !py-1.5 text-xs"
+            variant="secondary"
+            size="sm"
+            className="justify-start"
+            onPress={() => setValue(ex)}
           >
             {Number(ex).toLocaleString()}
-          </button>
+          </Button>
         ))}
       </div>
     </div>

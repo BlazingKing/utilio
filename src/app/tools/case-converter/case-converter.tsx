@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { TextArea, Card, Label } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 
 /** แยกข้อความเป็นคำ รองรับ camelCase, snake_case, ช่องว่าง, ขีด */
@@ -72,34 +73,32 @@ export function CaseConverter() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div>
-        <label htmlFor="cc-input" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="cc-input" className="text-sm font-medium">
           ข้อความต้นฉบับ
-        </label>
-        <textarea
+        </Label>
+        <TextArea
           id="cc-input"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="พิมพ์หรือวางข้อความที่นี่..."
           rows={4}
-          className="field resize-y"
+          fullWidth
+          className="resize-y"
         />
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
         {results.map((r) => (
-          <div key={r.label} className="card p-3">
+          <Card key={r.label} className="p-3">
             <div className="mb-1.5 flex items-center justify-between">
               <span className="text-xs font-medium text-muted">{r.label}</span>
-              <CopyButton
-                value={r.value}
-                className="btn-ghost !px-2 !py-1 text-xs"
-              />
+              <CopyButton value={r.value} />
             </div>
             <p className="min-h-6 break-words font-mono text-sm">
               {r.value || <span className="text-muted">—</span>}
             </p>
-          </div>
+          </Card>
         ))}
       </div>
     </div>

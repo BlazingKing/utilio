@@ -7,16 +7,18 @@
 - **Next.js 16** (App Router) + **React 19**
 - **TypeScript**
 - **Tailwind CSS v4**
+- **HeroUI v3** (คอมโพเนนต์ UI บน React Aria + Tailwind v4)
+- **next-themes** (สลับธีมสว่าง/มืด)
 - **lucide-react** (ไอคอน)
 - Deploy บน **Vercel** (ทุกหน้าเป็น static — ไม่ต้องใช้ server runtime)
 
-## เครื่องมือปัจจุบัน (18 รายการ / 5 หมวด)
+## เครื่องมือปัจจุบัน (20 รายการ / 5 หมวด)
 
 | หมวด | เครื่องมือ |
 | --- | --- |
-| เครื่องมือไทย | จำนวนเงินเป็นตัวหนังสือ (บาทถ้วน), แปลงปี พ.ศ. ↔ ค.ศ., ตรวจเลขบัตรประชาชน, แปลงเลขไทย ↔ อารบิก |
+| เครื่องมือไทย | จำนวนเงินเป็นตัวหนังสือ (บาทถ้วน), แปลงปี พ.ศ. ↔ ค.ศ., ตรวจเลขบัตรประชาชน, แปลงเลขไทย ↔ อารบิก, คำนวณ VAT 7% |
 | แปลง & จัดข้อความ | แปลงตัวพิมพ์, นับข้อความ, จัดรูปแบบ JSON, Base64 |
-| สำหรับนักพัฒนา | URL Encode/Decode, สร้าง UUID, สร้าง Hash (SHA), แปลง Timestamp, ถอดรหัส JWT |
+| สำหรับนักพัฒนา | URL Encode/Decode, สร้าง UUID, สร้าง Hash (SHA), แปลง Timestamp, ถอดรหัส JWT, สร้างรหัสผ่าน |
 | คำนวณ & แปลงหน่วย | แปลงหน่วย, คำนวณเปอร์เซ็นต์ |
 | สี & รูปภาพ | แปลงสี (HEX/RGB/HSL), สร้าง QR Code, ย่อ & บีบอัดรูปภาพ |
 
@@ -38,7 +40,8 @@ src/
 │  └─ tools/<slug>/
 │     ├─ page.tsx           # Server Component: metadata + ครอบด้วย <ToolPage>
 │     └─ <name>.tsx         # Client Component: ตัวเครื่องมือ ("use client")
-├─ components/              # SiteHeader, SiteFooter, ToolCard, ToolPage, CopyButton, ToolExplorer
+├─ components/              # Providers (ธีม), SiteHeader, SiteFooter, ToolCard, ToolPage, CopyButton, ToolExplorer
+│  └─ ui/                   # ตัวครอบ HeroUI: AppSelect, AppSlider, SegmentedControl
 └─ lib/
    └─ tools.ts             # ⭐ registry ของเครื่องมือ + หมวดหมู่ทั้งหมด
 ```

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { RefreshCw } from "lucide-react";
+import { Input, Button, Switch, Label } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 
 function makeUuids(n: number): string[] {
@@ -17,49 +18,44 @@ export function UuidGenerator() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-end gap-3">
-        <div>
-          <label htmlFor="uuid-count" className="mb-1.5 block text-sm font-medium">
+      <div className="flex flex-wrap items-end gap-4">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="uuid-count" className="text-sm font-medium">
             จำนวน
-          </label>
-          <input
+          </Label>
+          <Input
             id="uuid-count"
             type="number"
             min={1}
             max={100}
-            value={count}
+            value={String(count)}
             onChange={(e) => setCount(Number(e.target.value))}
-            className="field w-24"
+            className="w-24"
           />
         </div>
-        <label className="flex cursor-pointer items-center gap-2 py-2 text-sm">
-          <input
-            type="checkbox"
-            checked={uppercase}
-            onChange={(e) => setUppercase(e.target.checked)}
-            className="h-4 w-4 accent-[var(--brand)]"
-          />
-          ตัวพิมพ์ใหญ่
-        </label>
-        <button onClick={() => setRaw(makeUuids(count))} className="btn-primary ml-auto">
+        <Switch isSelected={uppercase} onChange={setUppercase} className="py-2">
+          <Switch.Content>
+            <Switch.Control>
+              <Switch.Thumb />
+            </Switch.Control>
+            ตัวพิมพ์ใหญ่
+          </Switch.Content>
+        </Switch>
+        <Button variant="primary" className="ml-auto" onPress={() => setRaw(makeUuids(count))}>
           <RefreshCw className="h-4 w-4" /> สร้างใหม่
-        </button>
+        </Button>
       </div>
 
       <div className="flex items-center justify-between">
         <span className="text-sm text-muted">{uuids.length} รายการ (UUID v4)</span>
-        <CopyButton
-          value={uuids.join("\n")}
-          label="คัดลอกทั้งหมด"
-          className="btn-ghost !px-2.5 !py-1 text-xs"
-        />
+        <CopyButton value={uuids.join("\n")} label="คัดลอกทั้งหมด" />
       </div>
 
       <div className="flex flex-col gap-2">
         {uuids.map((u, i) => (
           <div key={i} className="flex items-center justify-between gap-2 rounded-xl bg-surface-2 px-3 py-2">
             <code className="truncate font-mono text-sm">{u}</code>
-            <CopyButton value={u} className="btn-ghost !px-2 !py-1 text-xs" />
+            <CopyButton value={u} />
           </div>
         ))}
       </div>

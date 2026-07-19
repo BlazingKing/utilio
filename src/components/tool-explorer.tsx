@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Search, SearchX } from "lucide-react";
+import { Input, Card } from "@heroui/react";
 import { categories, tools } from "@/lib/tools";
 import { ToolCard } from "@/components/tool-card";
 
@@ -21,24 +22,25 @@ export function ToolExplorer() {
   return (
     <div>
       <div className="relative mb-8">
-        <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-muted" />
-        <input
+        <Search className="pointer-events-none absolute left-3.5 top-1/2 z-10 h-4.5 w-4.5 -translate-y-1/2 text-muted" />
+        <Input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="ค้นหาเครื่องมือ... (เช่น json, แปลงหน่วย, base64)"
-          className="field py-3 pl-11 text-base"
           aria-label="ค้นหาเครื่องมือ"
+          fullWidth
+          className="pl-11"
         />
       </div>
 
       {filtered.length === 0 ? (
-        <div className="card flex flex-col items-center gap-2 px-4 py-16 text-center text-muted">
+        <Card className="flex flex-col items-center gap-2 px-4 py-16 text-center text-muted">
           <SearchX className="h-8 w-8" />
           <p>
             ไม่พบเครื่องมือที่ตรงกับ &ldquo;<span className="text-foreground">{query}</span>&rdquo;
           </p>
-        </div>
+        </Card>
       ) : q ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((tool) => (

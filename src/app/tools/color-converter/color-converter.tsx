@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Shuffle } from "lucide-react";
+import { Input, Button } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
@@ -70,16 +71,17 @@ export function ColorConverter() {
           className="h-11 w-16 cursor-pointer rounded-lg border border-border bg-surface p-1"
           aria-label="เลือกสี"
         />
-        <input
+        <Input
           type="text"
           value={hex}
           onChange={(e) => setHex(e.target.value)}
           placeholder="#6366f1"
-          className="field w-40 font-mono"
+          className="w-40 font-mono"
+          aria-label="ค่าสี HEX"
         />
-        <button onClick={randomColor} className="btn-ghost">
+        <Button variant="secondary" onPress={randomColor}>
           <Shuffle className="h-4 w-4" /> สุ่มสี
-        </button>
+        </Button>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -98,7 +100,7 @@ function ValueRow({ label, value }: { label: string; value: string }) {
         <span className="w-12 text-xs font-semibold text-muted">{label}</span>
         <code className="font-mono text-sm">{value || "—"}</code>
       </div>
-      <CopyButton value={value} className="btn-ghost !px-2 !py-1 text-xs" />
+      <CopyButton value={value} />
     </div>
   );
 }
