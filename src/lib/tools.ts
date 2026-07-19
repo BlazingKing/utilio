@@ -24,6 +24,13 @@ import {
   ImageDown,
   Lock,
   ReceiptText,
+  Banknote,
+  Landmark,
+  CalendarClock,
+  Diff,
+  Table,
+  ScanLine,
+  Dices,
   type LucideIcon,
 } from "lucide-react";
 
@@ -119,6 +126,14 @@ export const tools: Tool[] = [
     icon: Binary,
     keywords: ["base64", "encode", "decode", "เข้ารหัส", "ถอดรหัส"],
   },
+  {
+    slug: "text-diff",
+    name: "เทียบข้อความ (Diff)",
+    description: "เปรียบเทียบข้อความสองชุด ไฮไลต์บรรทัดที่เพิ่ม ลบ และเปลี่ยนแปลง",
+    category: "text",
+    icon: Diff,
+    keywords: ["diff", "เทียบข้อความ", "compare", "เปรียบเทียบ", "ต่าง", "changes"],
+  },
 
   // ---------- calc ----------
   {
@@ -136,6 +151,22 @@ export const tools: Tool[] = [
     category: "calc",
     icon: Percent,
     keywords: ["percent", "percentage", "discount", "เปอร์เซ็นต์", "ส่วนลด"],
+  },
+  {
+    slug: "age-calculator",
+    name: "คำนวณอายุ / นับวัน",
+    description: "คำนวณอายุจากวันเกิด (ปี/เดือน/วัน) และนับจำนวนวันระหว่างสองวันที่ พร้อมปี พ.ศ.",
+    category: "calc",
+    icon: CalendarClock,
+    keywords: ["อายุ", "age", "วันเกิด", "นับวัน", "date diff", "ปฏิทิน", "birthday"],
+  },
+  {
+    slug: "random-picker",
+    name: "สุ่มรายชื่อ / สุ่มเลข",
+    description: "สุ่มเลือกจากรายการ สับลำดับ หรือสุ่มตัวเลขในช่วงที่กำหนด — เหมาะกับจับรางวัลและแบ่งกลุ่ม",
+    category: "calc",
+    icon: Dices,
+    keywords: ["สุ่ม", "random", "จับรางวัล", "สุ่มชื่อ", "สุ่มเลข", "shuffle", "picker"],
   },
 
   // ---------- thai ----------
@@ -178,6 +209,22 @@ export const tools: Tool[] = [
     category: "thai",
     icon: ReceiptText,
     keywords: ["vat", "ภาษีมูลค่าเพิ่ม", "7%", "แยก vat", "บวก vat", "ราคาก่อนภาษี", "ใบกำกับภาษี"],
+  },
+  {
+    slug: "promptpay-qr",
+    name: "สร้าง QR พร้อมเพย์",
+    description: "สร้าง QR รับเงินพร้อมเพย์ (PromptPay) จากเบอร์มือถือหรือเลขบัตรประชาชน ระบุจำนวนเงินได้",
+    category: "thai",
+    icon: Banknote,
+    keywords: ["พร้อมเพย์", "promptpay", "qr", "รับเงิน", "โอนเงิน", "พร้อมเพย์ qr", "emvco"],
+  },
+  {
+    slug: "income-tax",
+    name: "คำนวณภาษีเงินได้บุคคลธรรมดา",
+    description: "คำนวณภาษีเงินได้ตามขั้นบันไดของไทย พร้อมค่าลดหย่อนส่วนตัวและค่าใช้จ่าย",
+    category: "thai",
+    icon: Landmark,
+    keywords: ["ภาษี", "เงินได้", "ภงด", "income tax", "ขั้นบันได", "ลดหย่อน", "คำนวณภาษี"],
   },
 
   // ---------- dev ----------
@@ -229,6 +276,14 @@ export const tools: Tool[] = [
     icon: Lock,
     keywords: ["password", "รหัสผ่าน", "generate", "สุ่ม", "random", "secure", "strong"],
   },
+  {
+    slug: "csv-json",
+    name: "แปลง CSV ↔ JSON",
+    description: "แปลงข้อมูล CSV เป็น JSON และกลับกัน รองรับค่าที่มีเครื่องหมายคำพูดและคอมมา",
+    category: "dev",
+    icon: Table,
+    keywords: ["csv", "json", "convert", "แปลง", "ตาราง", "spreadsheet", "excel"],
+  },
 
   // ---------- media ----------
   {
@@ -254,6 +309,14 @@ export const tools: Tool[] = [
     category: "media",
     icon: ImageDown,
     keywords: ["image", "compress", "resize", "รูปภาพ", "ย่อรูป", "บีบอัด", "ลดขนาด"],
+  },
+  {
+    slug: "qr-reader",
+    name: "อ่าน QR จากรูป",
+    description: "อัปโหลดรูปภาพที่มี QR Code แล้วถอดข้อความ/ลิงก์ออกมา ประมวลผลในเบราว์เซอร์",
+    category: "media",
+    icon: ScanLine,
+    keywords: ["qr", "reader", "scan", "อ่าน qr", "ถอด qr", "สแกน", "decode"],
   },
 ];
 
