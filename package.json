@@ -11,7 +11,9 @@
   "dependencies": {
     "@heroui/react": "^3.2.2",
     "@heroui/theme": "^2.4.26",
+    "@types/js-yaml": "^4.0.9",
     "framer-motion": "^12.42.2",
+    "js-yaml": "^5.2.1",
     "jsqr": "^1.4.0",
     "lucide-react": "^1.25.0",
     "next": "16.2.10",

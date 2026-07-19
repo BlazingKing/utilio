@@ -39,6 +39,14 @@ import {
   ListOrdered,
   Pilcrow,
   FileCode,
+  LandPlot,
+  TrendingUp,
+  Wallet,
+  FileJson,
+  Code,
+  FileImage,
+  Blend,
+  Ratio,
   type LucideIcon,
 } from "lucide-react";
 
@@ -224,6 +232,14 @@ export const tools: Tool[] = [
     icon: HeartPulse,
     keywords: ["bmi", "ดัชนีมวลกาย", "น้ำหนัก", "ส่วนสูง", "อ้วน", "ผอม", "สุขภาพ"],
   },
+  {
+    slug: "compound-interest",
+    name: "ดอกเบี้ยทบต้น / เงินออม",
+    description: "คำนวณการเติบโตของเงินออมแบบทบต้น พร้อมเงินฝากรายเดือน และดูผลลัพธ์รายปี",
+    category: "calc",
+    icon: TrendingUp,
+    keywords: ["ดอกเบี้ย", "ทบต้น", "เงินออม", "compound interest", "ออมเงิน", "ลงทุน", "savings"],
+  },
 
   // ---------- thai ----------
   {
@@ -281,6 +297,22 @@ export const tools: Tool[] = [
     category: "thai",
     icon: Landmark,
     keywords: ["ภาษี", "เงินได้", "ภงด", "income tax", "ขั้นบันได", "ลดหย่อน", "คำนวณภาษี"],
+  },
+  {
+    slug: "net-salary",
+    name: "คำนวณเงินเดือนสุทธิ",
+    description: "คำนวณเงินเดือนหลังหักประกันสังคมและภาษี ณ ที่จ่าย เหลือรับจริงต่อเดือน",
+    category: "thai",
+    icon: Wallet,
+    keywords: ["เงินเดือน", "สุทธิ", "net salary", "ประกันสังคม", "sso", "ภาษีหัก ณ ที่จ่าย", "take home"],
+  },
+  {
+    slug: "thai-land-unit",
+    name: "แปลงหน่วยที่ดินไทย",
+    description: "แปลงหน่วยที่ดิน ไร่ งาน ตารางวา กับตารางเมตร ตารางฟุต และเอเคอร์",
+    category: "thai",
+    icon: LandPlot,
+    keywords: ["ไร่", "งาน", "ตารางวา", "ที่ดิน", "land", "rai", "ตารางเมตร", "อสังหา"],
   },
 
   // ---------- dev ----------
@@ -364,6 +396,22 @@ export const tools: Tool[] = [
     icon: Timer,
     keywords: ["cron", "crontab", "schedule", "ตารางเวลา", "อธิบาย cron", "expression"],
   },
+  {
+    slug: "json-yaml",
+    name: "แปลง JSON ↔ YAML",
+    description: "แปลงข้อมูลระหว่าง JSON และ YAML ไปมา พร้อมตรวจสอบความถูกต้อง",
+    category: "dev",
+    icon: FileJson,
+    keywords: ["json", "yaml", "yml", "convert", "แปลง", "config"],
+  },
+  {
+    slug: "escape-unescape",
+    name: "Escape / Unescape",
+    description: "แปลงอักขระพิเศษ — HTML entity, Unicode (\\uXXXX) และ backslash (\\n \\t) ไปมา",
+    category: "dev",
+    icon: Code,
+    keywords: ["escape", "unescape", "html entity", "unicode", "backslash", "แปลงอักขระ"],
+  },
 
   // ---------- media ----------
   {
@@ -397,6 +445,30 @@ export const tools: Tool[] = [
     category: "media",
     icon: ScanLine,
     keywords: ["qr", "reader", "scan", "อ่าน qr", "ถอด qr", "สแกน", "decode"],
+  },
+  {
+    slug: "image-base64",
+    name: "รูปภาพ → Base64",
+    description: "แปลงไฟล์รูปภาพเป็น Base64 / Data URI สำหรับฝังใน HTML หรือ CSS โดยตรง",
+    category: "media",
+    icon: FileImage,
+    keywords: ["base64", "data uri", "รูปภาพ", "image", "embed", "ฝังรูป", "encode"],
+  },
+  {
+    slug: "color-palette",
+    name: "จานสี & ไล่เฉด",
+    description: "สร้างชุดเฉดสีอ่อน-เข้มจากสีหลัก พร้อมโค้ด HEX และตัวแปร CSS สำหรับดีไซน์",
+    category: "media",
+    icon: Blend,
+    keywords: ["palette", "จานสี", "เฉดสี", "shades", "tints", "สี", "design", "css"],
+  },
+  {
+    slug: "aspect-ratio",
+    name: "คำนวณอัตราส่วนภาพ",
+    description: "หาอัตราส่วนภาพ (เช่น 16:9) และคำนวณขนาดใหม่โดยรักษาสัดส่วนเดิม",
+    category: "media",
+    icon: Ratio,
+    keywords: ["aspect ratio", "อัตราส่วน", "16:9", "resize", "สัดส่วน", "ขนาดภาพ"],
   },
 ];
 
