@@ -99,18 +99,21 @@ export function BahtText() {
         </p>
       </Card>
 
-      <div className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-3">
-        {["0", "25", "108", "1000000", "1234.75", "1000001"].map((ex) => (
-          <Button
-            key={ex}
-            variant="secondary"
-            size="sm"
-            className="justify-start"
-            onPress={() => setValue(ex)}
-          >
-            {Number(ex).toLocaleString()}
-          </Button>
-        ))}
+      <div className="flex flex-col gap-2">
+        <span className="text-xs text-muted">ลองตัวอย่าง</span>
+        <div className="flex flex-wrap gap-2">
+          {["0", "25", "108", "1000000", "1234.75", "1000001"].map((ex) => (
+            <Button
+              key={ex}
+              variant="outline"
+              size="sm"
+              className="tabular-nums"
+              onPress={() => setValue(ex)}
+            >
+              {Number(ex).toLocaleString()}
+            </Button>
+          ))}
+        </div>
       </div>
     </div>
   );
