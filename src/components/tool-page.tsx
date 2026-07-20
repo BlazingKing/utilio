@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { getTool } from "@/lib/tools";
+import { TrackRecent } from "@/components/track-recent";
 
 /**
  * โครงหน้าเครื่องมือ — แสดงหัวข้อ/คำอธิบายจาก registry อัตโนมัติ
@@ -18,6 +19,7 @@ export function ToolPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
+      <TrackRecent slug={slug} />
       <Link
         href="/"
         className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground"

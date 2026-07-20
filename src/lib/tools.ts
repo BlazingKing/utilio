@@ -47,6 +47,8 @@ import {
   FileImage,
   Blend,
   Ratio,
+  Zap,
+  HardDrive,
   type LucideIcon,
 } from "lucide-react";
 
@@ -307,6 +309,14 @@ export const tools: Tool[] = [
     keywords: ["เงินเดือน", "สุทธิ", "net salary", "ประกันสังคม", "sso", "ภาษีหัก ณ ที่จ่าย", "take home"],
   },
   {
+    slug: "electricity-bill",
+    name: "คำนวณค่าไฟฟ้า",
+    description: "ประมาณค่าไฟบ้านตามอัตราก้าวหน้า (ขั้นบันได) พร้อมค่าบริการ ค่า Ft และ VAT 7%",
+    category: "thai",
+    icon: Zap,
+    keywords: ["ค่าไฟ", "ไฟฟ้า", "electricity", "หน่วยไฟ", "kwh", "mea", "pea", "ft", "ขั้นบันได"],
+  },
+  {
     slug: "thai-land-unit",
     name: "แปลงหน่วยที่ดินไทย",
     description: "แปลงหน่วยที่ดิน ไร่ งาน ตารางวา กับตารางเมตร ตารางฟุต และเอเคอร์",
@@ -403,6 +413,14 @@ export const tools: Tool[] = [
     category: "dev",
     icon: FileJson,
     keywords: ["json", "yaml", "yml", "convert", "แปลง", "config"],
+  },
+  {
+    slug: "data-size",
+    name: "แปลงหน่วยข้อมูล",
+    description: "แปลง Byte, KB, MB, GB, TB (ฐาน 1024 หรือ 1000) พร้อมคำนวณเวลาดาวน์โหลด",
+    category: "dev",
+    icon: HardDrive,
+    keywords: ["byte", "kb", "mb", "gb", "tb", "ขนาดไฟล์", "หน่วยข้อมูล", "download", "ดาวน์โหลด"],
   },
   {
     slug: "escape-unescape",
