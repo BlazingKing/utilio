@@ -31,7 +31,7 @@ export function SegmentedControl({
       <Tabs.ListContainer>
         <Tabs.List aria-label={ariaLabel ?? "เลือกโหมด"}>
           {options.map((o) => (
-            <Tabs.Tab key={o.value} id={o.value}>
+            <Tabs.Tab key={o.value} id={o.value} className="whitespace-nowrap">
               {o.label}
               <Tabs.Indicator />
             </Tabs.Tab>
