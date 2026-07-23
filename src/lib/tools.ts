@@ -49,6 +49,7 @@ import {
   Ratio,
   Zap,
   HardDrive,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 
@@ -373,6 +374,14 @@ export const tools: Tool[] = [
     category: "dev",
     icon: Lock,
     keywords: ["password", "รหัสผ่าน", "generate", "สุ่ม", "random", "secure", "strong"],
+  },
+  {
+    slug: "aes",
+    name: "AES เข้ารหัส / ถอดรหัส",
+    description: "เข้ารหัสและถอดรหัสข้อความด้วย AES-256 พร้อมรหัสผ่าน เข้ากันได้กับ CryptoJS และ OpenSSL (Salted__)",
+    category: "dev",
+    icon: ShieldCheck,
+    keywords: ["aes", "encrypt", "decrypt", "cryptojs", "openssl", "salted", "เข้ารหัส", "ถอดรหัส", "รหัสผ่าน"],
   },
   {
     slug: "csv-json",

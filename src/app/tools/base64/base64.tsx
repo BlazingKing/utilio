@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowRightLeft } from "lucide-react";
+import Link from "next/link";
+import { ArrowRightLeft, ShieldCheck } from "lucide-react";
 import { TextArea, Label } from "@heroui/react";
 import { CopyButton } from "@/components/copy-button";
 import { SegmentedControl } from "@/components/ui/segmented-control";
@@ -38,6 +39,9 @@ export function Base64Tool() {
     }
   }, [input, mode]);
 
+  // "U2FsdGVkX1" = base64 ของ "Salted__" — ข้อมูลเข้ารหัส AES แบบ OpenSSL/CryptoJS ไม่ใช่ข้อความธรรมดา
+  const isEncrypted = mode === "decode" && input.trim().startsWith("U2FsdGVkX1");
+
   return (
     <div className="flex flex-col gap-4">
       <SegmentedControl
@@ -66,6 +70,19 @@ export function Base64Tool() {
           spellCheck={false}
         />
       </div>
+
+      {isEncrypted && (
+        <div className="flex items-start gap-2.5 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
+          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" />
+          <p>
+            ข้อมูลนี้ถูกเข้ารหัสด้วย AES แบบ OpenSSL/CryptoJS (ขึ้นต้นด้วย{" "}
+            <code className="font-mono">Salted__</code>) ไม่ใช่ Base64 ธรรมดา — ต้องใช้รหัสผ่านถอด ไปที่{" "}
+            <Link href="/tools/aes" className="font-medium underline underline-offset-2">
+              เครื่องมือ AES เข้ารหัส / ถอดรหัส
+            </Link>
+          </p>
+        </div>
+      )}
 
       <div className="flex items-center justify-center text-muted">
         <ArrowRightLeft className="h-4 w-4" />
